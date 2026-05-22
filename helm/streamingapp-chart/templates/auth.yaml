@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: auth-service
+  namespace: {{ .Values.namespace }}
+
+spec:
+  replicas: {{ .Values.auth.replicas }}
+
+  selector:
+    matchLabels:
+      app: auth-service
+
+  template:
+    metadata:
+      labels:
+        app: auth-service
+
+    spec:
+      containers:
+      - name: auth-service
+        image: {{ .Values.auth.image }}
+
+        ports:
+        - containerPort: {{ .Values.auth.port }}
+
+        env:
+        - name: PORT
+          value: "{{ .Values.auth.port }}"
+
+        - name: MONGO_URI
+          value: "mongodb://mongo:27017/streamingapp"
+
+        - name: JWT_SECRET
+          value: "{{ .Values.jwtSecret }}"
+
+        - name: CLIENT_URLS
+          value: "http://a46ffeae2e8974a25bdea7cc4560c90d-389211313.ap-south-1.elb.amazonaws.com"
+
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: auth-service
+  namespace: {{ .Values.namespace }}
+
+spec:
+  type: LoadBalancer
+
+  selector:
+    app: auth-service
+
+  ports:
+  - port: {{ .Values.auth.port }}
+    targetPort: {{ .Values.auth.port }}

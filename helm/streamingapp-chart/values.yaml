@@ -1,0 +1,32 @@
+namespace: streamingapp
+
+mongo:
+  image: mongo:6
+  port: 27017
+
+frontend:
+  image: 610405653088.dkr.ecr.ap-south-1.amazonaws.com/streamingapp-frontend:v3
+  replicas: 2
+  port: 80
+
+auth:
+  image: 610405653088.dkr.ecr.ap-south-1.amazonaws.com/streamingapp-auth:latest
+  replicas: 2
+  port: 3001
+
+streaming:
+  image: 610405653088.dkr.ecr.ap-south-1.amazonaws.com/streamingapp-streaming:latest
+  replicas: 2
+  port: 3002
+
+admin:
+  image: 610405653088.dkr.ecr.ap-south-1.amazonaws.com/streamingapp-admin:latest
+  replicas: 2
+  port: 3003
+
+chat:
+  image: 610405653088.dkr.ecr.ap-south-1.amazonaws.com/streamingapp-chat:latest
+  replicas: 2
+  port: 3004
+
+jwtSecret: changeme
