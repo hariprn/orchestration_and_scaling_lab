@@ -338,12 +338,12 @@ Kubernetes Pods:
 Kubernetes Services:
 
 
-![Kubernetes Services](screenshots/k8s-services.png)
+![Kubernetes Services](screenshots/services.png)
 
 
 Frontend Application:
 
-![Frontend Application](screenshots/frontend-app.png)
+![Frontend Application](screenshots/streaming-application.png)
 
 
 ---
@@ -373,13 +373,6 @@ helm upgrade streamingapp streamingapp-chart -n streamingapp
 ```bash
 helm list -n streamingapp
 ```
-
-## Screenshots
-
-Helm deployment:
-
-
-![Helm Deployment](screenshots/helm-deployment.png)
 
 
 ---
@@ -420,7 +413,7 @@ kubectl get hpa -n streamingapp
 HPA Metrics:
 
 
-![HPA Metrics](screenshots/hpa-metrics.png)
+![HPA Metrics](screenshots/hpa.png)
 
 
 ---
